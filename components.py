@@ -84,10 +84,10 @@ class BingSearch:
         prediction = pipe_bing.run(query=search_query, params={"Retriever": {"top_k": 5}, "Reader": {"top_k": 1}})
 
         result_answer = prediction['answers'][0]
-        print("********************" + str(result_answer))
+        print(result_answer)
         actual_answer = str(result_answer).split("answer='")[1].split("',")[0]
         actual_score = str(result_answer).split("score=")[1].split(",")[0]
         actual_text = str(result_answer).split("context='")[1].split("',")[0]
 
         result_list = [{'answer': actual_answer, 'score': actual_score, 'text': actual_text}]
-        return result_list
+        return actual_answer
