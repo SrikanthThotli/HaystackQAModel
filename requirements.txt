@@ -4,3 +4,5 @@ Flask==2.1.0
 requests==2.27.1
 spacy==3.4.1
 gunicorn==19.0.0
+mod_wsgi==4.9.4
+Django==4.1.2
