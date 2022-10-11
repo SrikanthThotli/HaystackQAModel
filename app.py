@@ -1,4 +1,5 @@
 import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 
 import spacy
 from flask import Flask, render_template, jsonify, request
