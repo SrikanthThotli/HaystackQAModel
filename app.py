@@ -11,6 +11,11 @@ bingSearch = BingSearch(bing_subscription_key)
 def welcome():
     return "Welcome all"
 
+@st.cache(allow_output_mutation = True)
+def get_model(self):
+    reader_bert = FARMReader(model_name_or_path="distilbert-base-uncased-distilled-squad", use_gpu=True)
+    return reader_bert
+
 def main():
     st.title ("Bing Search API QA Model")
     html_temp = """
@@ -19,8 +24,9 @@ def main():
     st. markdown(html_temp,unsafe_allow_html=True)
     question = st.text_input("Question","")
     result = ""
+    reader_bert = get_model()
     if st.button("Submit"):
-        result = bingSearch.getAnswer(str(question))
+        result = bingSearch.getAnswer(str(question),reader_bert)
     st.success('{}'.format(result))
     if st.button("About"):
         st.text("Lets Learn")
