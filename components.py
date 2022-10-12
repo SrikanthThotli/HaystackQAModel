@@ -9,7 +9,7 @@ from haystack.utils import clean_wiki_text, convert_files_to_docs
 # An in-memory TfidfRetriever based on Pandas dataframes
 from haystack.nodes import TfidfRetriever
 from haystack.pipelines import ExtractiveQAPipeline
-from haystack.nodes import FARMReader
+
 
 
 class BingSearch:

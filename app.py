@@ -1,7 +1,7 @@
 import os
-
 import spacy
 import streamlit as st
+from haystack.nodes import FARMReader
 from components import BingSearch
 
 # subscription key
