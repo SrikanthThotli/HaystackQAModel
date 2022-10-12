@@ -12,7 +12,7 @@ def welcome():
     return "Welcome all"
 
 @st.cache(allow_output_mutation = True)
-def get_model(self):
+def get_model():
     reader_bert = FARMReader(model_name_or_path="distilbert-base-uncased-distilled-squad", use_gpu=True)
     return reader_bert
 
