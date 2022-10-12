@@ -17,7 +17,11 @@ class BingSearch:
     def __init__(self, subscription_key, url='https://api.bing.microsoft.com/v7.0/search'):
         self.key = subscription_key
         self.url = url
-        self.reader_bert = FARMReader(model_name_or_path="distilbert-base-uncased-distilled-squad", use_gpu=True)
+
+    @st.cache(allow_output_mutation = True)
+    def get_model(self):
+        reader_bert = FARMReader(model_name_or_path="distilbert-base-uncased-distilled-squad", use_gpu=True)
+        return reader_bert
 
     def bing_web_search(self, query):
         # set parameters
@@ -78,8 +82,9 @@ class BingSearch:
         docs = convert_files_to_docs(dir_path=doc_dir, clean_func=clean_wiki_text, split_paragraphs=True)
         document_store_bing.write_documents(docs)
         # An in-memory TfidfRetriever based on Pandas dataframes
+        reader_bert = get_model()
         retriever_bing = TfidfRetriever(document_store=document_store_bing)
-        pipe_bing = ExtractiveQAPipeline(self.reader_bert, retriever_bing)
+        pipe_bing = ExtractiveQAPipeline(reader_bert, retriever_bing)
         print("***********************************" + search_query + "****************************************")
         prediction = pipe_bing.run(query=search_query, params={"Retriever": {"top_k": 5}, "Reader": {"top_k": 1}})
 

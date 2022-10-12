@@ -17,11 +17,11 @@ def main():
     <h3>Ask me anything</h3>
     """
     st. markdown(html_temp,unsafe_allow_html=True)
-    question = st.text_input("Question","Type your question here...")
+    question = st.text_input("Question","")
     result = ""
     if st.button("Submit"):
         result = bingSearch.getAnswer(str(question))
-    st.success('The output is {}'.format(result))
+    st.success('{}'.format(result))
     if st.button("About"):
         st.text("Lets Learn")
         st.text("Built with Streamlit")
